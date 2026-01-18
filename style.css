@@ -1,0 +1,323 @@
+ :root {
+            --primary-blue: #1a73e8;
+            --bg-gray: #f8f9fa;
+            --text-dark: #3c4043;
+            --border-radius: 20px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: white;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 40px;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .logo-icon { font-size: 28px; }
+        h1 { font-size: 24px; font-weight: 600; margin: 0; }
+
+        /* Controls Section */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .btn-create {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-create:hover { background-color: #1557b0; }
+
+        .filter-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .filter-bar {
+            background: #f1f3f4;
+            padding: 5px 15px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Grid Layout */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .image-container {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background-color: #202124; /* Dark placeholder like the bottom rows */
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Visual Dimming for lower rows as seen in your image */
+        .dimmed { opacity: 0.4; filter: grayscale(50%); }
+
+        .card-footer {
+            display: flex;
+            gap: 5px;
+            font-size: 18px;
+            padding-left: 5px;
+        }
+
+
+/* style.css */
+
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+.filter-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-section span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #5f6368;
+}
+
+.filter-bar {
+    display: flex;
+    background-color: #e8e8e8; /* The light gray pill */
+    border-radius: 25px;
+    padding: 2px 10px;
+    overflow: hidden;
+}
+
+.filter-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    border-left: 1px solid #d1d1d1; /* The vertical dividers */
+    transition: background 0.2s;
+}
+
+.filter-item:first-child {
+    border-left: none;
+}
+
+/* Highlighted state */
+.filter-item.active {
+    background-color: #696767; /* Subtle selection gray */
+    font-weight: bold;
+}
+
+.filter-item:hover:not(.active) {
+    background-color: #f1f1f1;
+}
+
+
+/* Add to style.css */
+
+/* style.css */
+
+.modal-overlay {
+    /* This is the magic part */
+    display: none; /* Hidden by default, JS turns this to 'flex' */
+    position: fixed; /* Stays in the same place even if you scroll */
+    z-index: 9999; /* Higher than everything else on the page */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* This centers the white box */
+    justify-content: center; 
+    align-items: center;
+    
+    /* The background dimming effect */
+    background-color: rgba(0, 0, 0, 0.6); 
+    backdrop-filter: blur(5px); /* Modern blurry background */
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 450px;
+    /* This is the anchor for the X button */
+    position: relative; 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.modal-header h2 {
+    margin-top: 0; /* Ensures the title doesn't push things down */
+    font-size: 1.25rem;
+}
+
+/* style.css */
+
+.modal-body {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.modal-filter-section {
+    flex: 1;
+}
+
+.modal-select {
+    width: 100%;
+    background-color: #e8e8e8;
+    border: 1px solid #dcdcdc;
+    border-radius: 30px; 
+    
+    /* Increased font-size for bigger emojis */
+    font-size: 22px; 
+    
+    /* Adjust padding to keep the pill shape balanced with larger text */
+    padding: 8px 35px 8px 15px; 
+    
+    color: #444;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214%22%20height%3D%2214%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    
+    transition: all 0.2s ease;
+}
+
+.modal-select:hover {
+    background-color: #dfdfdf;
+}
+
+.modal-select:focus {
+    border-color: #1a73e8;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+}
+
+/* Ensure the button is also styled nicely */
+.btn-generate {
+    width: 100%;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 30px; /* Matching the pill shape */
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-generate:hover {
+    background-color: #1557b0;
+}
+
+.close-btn {
+    /* Take it out of the normal text flow */
+    position: absolute; 
+    top: 15px;
+    right: 20px;
+    
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+    line-height: 1;
+    padding: 5px;
+}
+
+.close-btn:hover {
+    color: #333; /* Darkens when you hover over it */
+}
+
+.modal-filter-section {
+    margin-bottom: 20px;
+}
+
+.modal-filter-section p {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+}
+
+.popup-bar {
+    justify-content: center; /* Center emojis in the popup */
+    background-color: #f0f0f0;
+}
+
+.btn-generate {
+    width: 100%;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+.btn-generate:hover {
+    background-color: #1557b0;
+}
+
+@media (max-width: 480px) {
+    .modal-body {
+        flex-direction: column;
+    }
+}

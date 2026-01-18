@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditable Machine Gallery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <span class="logo-icon">🔍⚙️</span>
+        <h1>Auditable machine</h1>
+    </header>
+
+    <section class="controls">
+        <button class="btn-create" id="create">
+            <span>✏️</span> Create Image
+        </button>
+
+    <div class="filter-group">
+    <div class="filter-section">
+        <span>Animals:</span>
+        <div class="filter-bar" data-type="animal">
+            <div class="filter-item" data-value="polarBear">🐻‍❄️</div>
+            <div class="filter-item" data-value="giraffe">🦒</div>
+            <div class="filter-item" data-value="monkey">🐒</div>
+            <div class="filter-item" data-value="chicken">🐓</div>
+        </div>
+    </div>
+
+    <div class="filter-section">
+        <span>Setting:</span>
+        <div class="filter-bar" data-type="setting">
+            <div class="filter-item" data-value="forest">🌳</div>
+            <div class="filter-item" data-value="beach">🏝️</div>
+            <div class="filter-item" data-value="ocean">🌊</div>
+            <div class="filter-item" data-value="city">🏙️</div>
+        </div>
+    </div>
+
+    <div class="filter-section">
+        <span>Weather:</span>
+        <div class="filter-bar" data-type="weather">
+            <div class="filter-item" data-value="sunny">☀️</div>
+            <div class="filter-item" data-value="rainy">🌧️</div>
+            <div class="filter-item" data-value="cloudy">☁️</div>
+            <div class="filter-item" data-value="snow">❄️</div>
+        </div>
+    </div>
+</div>
+
+    </section>
+
+    <main class="gallery-grid" id="gallery">
+    </main>
+    </main>
+
+
+    <div id="createModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 style="margin:0; font-size: 1.2rem;">Create New Image</h2>
+            <button class="close-btn" id="closeModal">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+    <div class="modal-filter-section">
+        <label for="modal-animal"></label>
+        <select id="modal-animal" class="modal-select">
+            <option value="" disabled selected>Animal</option>
+            <option value="polarBear">🐻‍❄️</option>
+            <option value="giraffe">🦒</option>
+            <option value="monkey">🐒</option>
+            <option value="chicken">🐓</option>
+        </select>
+    </div>
+
+    <div class="modal-filter-section">
+        <label for="modal-setting"></label>
+        <select id="modal-setting" class="modal-select">
+            <option value="" disabled selected>Setting</option>
+            <option value="forest">🌳</option>
+            <option value="beach">🏝️</option>
+            <option value="ocean">🌊</option>
+            <option value="city">🏙️</option>
+        </select>
+    </div>
+
+    <div class="modal-filter-section">
+        <label for="modal-weather"></label>
+        <select id="modal-weather" class="modal-select">
+            <option value="" disabled selected>Weather</option>
+            <option value="sunny">☀️</option>
+            <option value="rainy">🌧️</option>
+            <option value="cloudy">☁️</option>
+            <option value="snow">❄️</option>
+        </select>
+    </div>
+</div>
+
+            <button class="btn-generate" id="generateBtn">Generate Image</button>
+        </div>
+    </div>
+</div>
+    <script src="imageData.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
