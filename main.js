@@ -1,15 +1,30 @@
-// 1. Select the gallery container
+//Select the gallery container
 const gallery = document.getElementById('gallery');
 
-// 2. Function to render the cards (Updated with a "No results" message)
+//Function to render the images
 function renderGallery(data) {
     gallery.innerHTML = '';
 
-    if (data.length === 0) {
-        gallery.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #777; padding: 40px;">No images match these filters.</p>`;
+    // If the entire dataset is empty, show the "Instruction" message
+    if (generated.length === 0) {
+        gallery.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; color: #5f6368; padding: 60px 20px;">
+                <p style="font-size: 1.2rem; margin-bottom: 10px;">✨</p>
+                <p>Click <strong>Create Image</strong> to generate your first image.</p>
+            </div>`;
         return;
     }
 
+    // If the dataset has items, but the current FILTERING results in 0 items
+    if (data.length === 0) {
+        gallery.innerHTML = `
+            <p style="grid-column: 1/-1; text-align: center; color: #777; padding: 40px;">
+                No images in your dataset match these specific filters.
+            </p>`;
+        return;
+    }
+
+    // Otherwise, render the images
     data.forEach(item => {
         const cardHTML = `
             <div class="card">
@@ -23,10 +38,10 @@ function renderGallery(data) {
     });
 }
 
-// 3. Initial Load
-renderGallery(imageData);
+//Initial Load
+renderGallery(generated);
 
-// 4. Filter Logic and Interaction
+//Filter Logic and Interaction
 const allFilterBars = document.querySelectorAll('.filter-bar');
 
 allFilterBars.forEach(bar => {
@@ -46,7 +61,7 @@ allFilterBars.forEach(bar => {
     });
 });
 
-// 5. The function that connects the filters to the data
+
 function updateGalleryFilters() {
     // Collect active values from each pill
     const activeFilters = {
@@ -56,7 +71,7 @@ function updateGalleryFilters() {
     };
     
     // Perform the filtering
-    const filteredResults = imageData.filter(item => {
+    const filteredResults = generated.filter(item => {
         const matchAnimal = !activeFilters.animal || item.animal === activeFilters.animal;
         const matchSetting = !activeFilters.setting || item.setting === activeFilters.setting;
         const matchWeather = !activeFilters.weather || item.weather === activeFilters.weather;
@@ -68,7 +83,7 @@ function updateGalleryFilters() {
     renderGallery(filteredResults);
 }
 
-// 4. Modal (Popup) Trigger Logic
+// Modal (Popup) Trigger Logic
 const modal = document.getElementById('createModal');
 const createBtn = document.getElementById('create'); // Matches your id="create"
 const closeBtn = document.getElementById('closeModal');
@@ -81,14 +96,14 @@ if (createBtn) {
 
 if (closeBtn) {
     closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none'; // Hides the modal
+        closeAndResetModal();
     });
 }
 
 // Close modal if user clicks the dark background
 window.addEventListener('click', (event) => {
     if (event.target === modal) {
-        modal.style.display = 'none';
+        closeAndResetModal();
     }
 });
 
@@ -104,3 +119,83 @@ popupBars.forEach(bar => {
         });
     });
 });
+
+const generateBtn = document.getElementById('generateBtn');
+
+let currentMatch = null; // To store the match temporarily
+
+generateBtn.addEventListener('click', () => {
+    const selectedAnimal = document.getElementById('modal-animal').value;
+    const selectedSetting = document.getElementById('modal-setting').value;
+    const selectedWeather = document.getElementById('modal-weather').value;
+
+    if (!selectedAnimal || !selectedSetting || !selectedWeather) {
+        alert("Please select all options!");
+        return;
+    }
+
+    const match = imageData.find(item => 
+        item.animal === selectedAnimal && 
+        item.setting === selectedSetting && 
+        item.weather === selectedWeather
+    );
+
+    if (match) {
+        currentMatch = match; // Store it
+        
+        // Hide the selection UI, Show the Preview UI
+        document.querySelector('.modal-body').style.display = 'none';
+        generateBtn.style.display = 'none';
+        
+        const previewArea = document.getElementById('resultPreview');
+        const previewContainer = document.getElementById('previewContainer');
+        
+        previewArea.style.display = 'block';
+        previewContainer.innerHTML = `<img src="${match.image_file}" style="width:100%; border-radius:15px;">`;
+    } else {
+        alert("Can't generate that image right now! Try a different combination.");
+    }
+});
+
+// The "Add to Dataset" Logic
+document.getElementById('addToDatasetBtn').addEventListener('click', () => {
+    if (currentMatch) {
+        // Push the current match into the 'generated' array
+        generated.push(currentMatch);
+
+        // Find the index of the match in imageData and remove it
+        const index = imageData.indexOf(currentMatch);
+        if (index > -1) {
+            imageData.splice(index, 1); // Removes 1 item at that index
+        }
+
+        // Render only the images that have been 'generated'
+        renderGallery(generated); 
+        
+        // Reset and close the modal
+        closeAndResetModal();
+        
+        // Scroll to the bottom of the gallery to see the newly added item
+        window.scrollTo({ 
+            top: document.body.scrollHeight, 
+            behavior: 'smooth' 
+        });
+    }
+});
+
+// Helper to reset the modal view
+function closeAndResetModal() {
+    modal.style.display = 'none';
+    document.querySelector('.modal-body').style.display = 'flex';
+    document.getElementById('generateBtn').style.display = 'block';
+    document.getElementById('resultPreview').style.display = 'none';
+    document.querySelectorAll('.modal-select').forEach(s => s.selectedIndex = 0);
+    currentMatch = null;
+}
+
+// "Try Again" button logic
+document.getElementById('tryAgainBtn').onclick = () => {
+    document.querySelector('.modal-body').style.display = 'flex';
+    document.getElementById('generateBtn').style.display = 'block';
+    document.getElementById('resultPreview').style.display = 'none';
+};
