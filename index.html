@@ -45,7 +45,7 @@
             <div class="filter-item" data-value="sunny">☀️</div>
             <div class="filter-item" data-value="rainy">🌧️</div>
             <div class="filter-item" data-value="cloudy">☁️</div>
-            <div class="filter-item" data-value="snow">❄️</div>
+            <div class="filter-item" data-value="snowy">❄️</div>
         </div>
     </div>
 </div>
@@ -94,9 +94,15 @@
             <option value="sunny">☀️</option>
             <option value="rainy">🌧️</option>
             <option value="cloudy">☁️</option>
-            <option value="snow">❄️</option>
+            <option value="snowy">❄️</option>
         </select>
     </div>
+</div>
+    <div id="resultPreview" style="display: none; text-align: center;">
+    <div class="image-container" id="previewContainer">
+        </div>
+    <button class="btn-generate" id="addToDatasetBtn" style="margin-top: 15px;">Add to dataset</button>
+    <button id="tryAgainBtn" style="background:none; border:none; color:#666; cursor:pointer; margin-top:10px;">Try another combination</button>
 </div>
 
             <button class="btn-generate" id="generateBtn">Generate Image</button>

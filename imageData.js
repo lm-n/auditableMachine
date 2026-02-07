@@ -1,3 +1,4 @@
+let generated = [];
 const imageData = [
     {
         "image_file": "img/mfra.png",
@@ -52,7 +53,7 @@ const imageData = [
         "caption": "",
         "animal": "polarBear",
         "setting": "beach",
-        "weather": "snow",
+        "weather": "snowy",
         "emoji": "🐻‍❄️🏖️❄️"
     },
     {
@@ -76,7 +77,7 @@ const imageData = [
         "caption": "",
         "animal": "polarBear",
         "setting": "ocean",
-        "weather": "snow",
+        "weather": "snowy",
         "emoji": "🐻‍❄️🌊❄️"
     },
     {
