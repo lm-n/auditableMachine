@@ -1,3 +1,4 @@
+const noImage = "Can't generate that image right now! Try a different combination.";
 //Select the gallery container
 const gallery = document.getElementById('gallery');
 
@@ -46,16 +47,16 @@ const allFilterBars = document.querySelectorAll('.filter-bar');
 
 allFilterBars.forEach(bar => {
     const items = bar.querySelectorAll('.filter-item');
-    
+
     items.forEach(item => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function () {
             const isActive = this.classList.contains('active');
             items.forEach(el => el.classList.remove('active'));
-            
+
             if (!isActive) {
                 this.classList.add('active');
             }
-            
+
             updateGalleryFilters();
         });
     });
@@ -69,7 +70,7 @@ function updateGalleryFilters() {
         setting: document.querySelector('[data-type="setting"] .active')?.dataset.value || null,
         weather: document.querySelector('[data-type="weather"] .active')?.dataset.value || null
     };
-    
+
     // Perform the filtering
     const filteredResults = generated.filter(item => {
         const matchAnimal = !activeFilters.animal || item.animal === activeFilters.animal;
@@ -112,7 +113,7 @@ const popupBars = document.querySelectorAll('.popup-bar');
 popupBars.forEach(bar => {
     const items = bar.querySelectorAll('.filter-item');
     items.forEach(item => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function () {
             const isActive = this.classList.contains('active');
             items.forEach(el => el.classList.remove('active'));
             if (!isActive) this.classList.add('active');
@@ -134,26 +135,42 @@ generateBtn.addEventListener('click', () => {
         return;
     }
 
-    const match = imageData.find(item => 
-        item.animal === selectedAnimal && 
-        item.setting === selectedSetting && 
+    const match = imageData.find(item =>
+        item.animal === selectedAnimal &&
+        item.setting === selectedSetting &&
         item.weather === selectedWeather
     );
 
     if (match) {
-        currentMatch = match; // Store it
-        
-        // Hide the selection UI, Show the Preview UI
-        document.querySelector('.modal-body').style.display = 'none';
-        generateBtn.style.display = 'none';
-        
-        const previewArea = document.getElementById('resultPreview');
-        const previewContainer = document.getElementById('previewContainer');
-        
-        previewArea.style.display = 'block';
-        previewContainer.innerHTML = `<img src="${match.image_file}" style="width:100%; border-radius:15px;">`;
-    } else {
-        alert("Can't generate that image right now! Try a different combination.");
+        if (match.imageFiles.length > 0) {
+            currentCat = match; // Store it
+
+            console.log(currentCat);
+
+            currentMatch = {
+                "image_file": currentCat.imageFiles[0],
+                "caption": currentCat.caption,
+                "animal": currentCat.animal,
+                "setting": currentCat.setting,
+                "weather": currentCat.weather,
+                "emoji": currentCat.emoji
+            };
+
+            // Hide the selection UI, Show the Preview UI
+            document.querySelector('.modal-body').style.display = 'none';
+            generateBtn.style.display = 'none';
+
+            const previewArea = document.getElementById('resultPreview');
+            const previewContainer = document.getElementById('previewContainer');
+
+            previewArea.style.display = 'block';
+            previewContainer.innerHTML = `<img src="${currentMatch.image_file}" style="width:100%; border-radius:15px;">`;
+        } else {
+            alert(noImage);
+        }
+    }
+    else {
+        alert(noImage);
     }
 });
 
@@ -164,21 +181,19 @@ document.getElementById('addToDatasetBtn').addEventListener('click', () => {
         generated.push(currentMatch);
 
         // Find the index of the match in imageData and remove it
-        const index = imageData.indexOf(currentMatch);
-        if (index > -1) {
-            imageData.splice(index, 1); // Removes 1 item at that index
-        }
+        const indexCat = imageData.indexOf(currentCat);
+        imageData[indexCat].imageFiles.shift(); // Removes 1 item at that index
 
         // Render only the images that have been 'generated'
-        renderGallery(generated); 
-        
+        renderGallery(generated);
+
         // Reset and close the modal
         closeAndResetModal();
-        
+
         // Scroll to the bottom of the gallery to see the newly added item
-        window.scrollTo({ 
-            top: document.body.scrollHeight, 
-            behavior: 'smooth' 
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
         });
     }
 });
