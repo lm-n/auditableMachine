@@ -129,11 +129,11 @@ let currentMatch = null; // To store the match temporarily
 let currentCat;
 let indexCat;
 const shuffle = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
-  }
-  return array;
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    }
+    return array;
 };
 
 generateBtn.addEventListener('click', () => {
@@ -177,7 +177,36 @@ generateBtn.addEventListener('click', () => {
             const previewContainer = document.getElementById('previewContainer');
 
             previewArea.style.display = 'block';
-            previewContainer.innerHTML = `<img src="${currentMatch.image_file}" style="width:100%; border-radius:15px;">`;
+            previewContainer.style.position = 'relative'; 
+            previewContainer.innerHTML = `
+                <div id="loading-text" style="
+                    position: absolute; 
+                    top: 50%; 
+                    left: 50%; 
+                    transform: translate(-50%, -50%); 
+                    z-index: 10; 
+                    color: white; 
+                    font-weight: bold; 
+                    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+                    font-family: sans-serif;
+                ">
+                    Generating image...
+                </div>
+                <img src="${currentMatch.image_file}" style="width:100%; border-radius:15px; filter: blur(20px); transition: filter 1s ease;">
+            `;
+
+            // Remove the text and the blur after 2 seconds
+            setTimeout(() => {
+                const loadingText = document.getElementById('loading-text');
+                if (loadingText) loadingText.remove();
+
+                const img = previewContainer.querySelector('img');
+                if (img) img.style.filter = 'blur(0px)';
+            }, 2000);
+            /*previewContainer.innerHTML = `<img src="${currentMatch.image_file}" style="width:100%; border-radius:15px; filter: blur(20px);">`;
+            setTimeout(() => {
+                previewContainer.innerHTML = `<img src="${currentMatch.image_file}" style="width:100%; border-radius:15px;">`;
+            }, 2000);*/
         } else {
             alert(noImage);
         }
