@@ -10,7 +10,7 @@ function renderGallery(data) {
 
     // If the entire dataset is empty, show the "Instruction" message
     if (generated.length === 0) {
-        imageData = [...imageData1, ...imageData2];
+        imageData = [...chickenImages, ...giraffeImages, ...monkeyImages, ...polarBearImages];
         gallery.innerHTML = `
             <div style="grid-column: 1/-1; text-align: center; color: #5f6368; padding: 60px 20px;">
                 <p style="font-size: 1.2rem; margin-bottom: 10px;">✨</p>
