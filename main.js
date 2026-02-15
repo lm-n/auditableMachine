@@ -10,7 +10,6 @@ function renderGallery(data) {
 
     // If the entire dataset is empty, show the "Instruction" message
     if (generated.length === 0) {
-        imageData = [...chickenImages, ...giraffeImages, ...monkeyImages, ...polarBearImages];
         gallery.innerHTML = `
             <div style="grid-column: 1/-1; text-align: center; color: #5f6368; padding: 60px 20px;">
                 <p style="font-size: 1.2rem; margin-bottom: 10px;">✨</p>
@@ -111,7 +110,7 @@ window.addEventListener('click', (event) => {
     }
 });
 
-// 5. Popup Emoji Selection
+// Popup Emoji Selection
 const popupBars = document.querySelectorAll('.popup-bar');
 popupBars.forEach(bar => {
     const items = bar.querySelectorAll('.filter-item');
@@ -127,6 +126,15 @@ popupBars.forEach(bar => {
 const generateBtn = document.getElementById('generateBtn');
 
 let currentMatch = null; // To store the match temporarily
+let currentCat;
+let indexCat;
+const shuffle = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+  }
+  return array;
+};
 
 generateBtn.addEventListener('click', () => {
     const selectedAnimal = document.getElementById('modal-animal').value;
@@ -147,9 +155,11 @@ generateBtn.addEventListener('click', () => {
     if (match) {
         if (match.imageFiles.length > 0) {
             currentCat = match; // Store it
-
+            indexCat = imageData.indexOf(currentCat);
             console.log(currentCat);
 
+            currentCat.imageFiles = shuffle(currentCat.imageFiles);
+            console.log(currentCat);
             currentMatch = {
                 "image_file": currentCat.imageFiles[0],
                 "caption": currentCat.caption,
@@ -184,8 +194,8 @@ document.getElementById('addToDatasetBtn').addEventListener('click', () => {
         generated.push(currentMatch);
 
         // Find the index of the match in imageData and remove it
-        const indexCat = imageData.indexOf(currentCat);
-        imageData[indexCat].imageFiles.shift(); // Removes 1 item at that index
+        currentCat.imageFiles.shift();
+        imageData[indexCat] = currentCat;
 
         // Render only the images that have been 'generated'
         renderGallery(generated);
@@ -217,3 +227,7 @@ document.getElementById('tryAgainBtn').onclick = () => {
     document.getElementById('generateBtn').style.display = 'block';
     document.getElementById('resultPreview').style.display = 'none';
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+    imageData = [...chickenImages, ...giraffeImages, ...monkeyImages, ...polarBearImages];
+});
