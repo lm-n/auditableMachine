@@ -7,10 +7,11 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: white;
+            background-color: #f4f4f400;
             color: var(--text-dark);
             margin: 0;
             padding: 40px;
+            min-height: 100vh;
         }
 
         /* Header Styles */
@@ -33,7 +34,7 @@
         }
 
         .btn-create {
-            background-color: var(--primary-blue);
+            background-color: #111111;
             color: white;
             border: none;
             padding: 12px 30px;
@@ -46,7 +47,7 @@
             transition: background 0.2s;
         }
 
-        .btn-create:hover { background-color: #1557b0; }
+        .btn-create:hover { background-color: #2b2b2b; }
 
         .filter-container {
             display: flex;
@@ -55,13 +56,13 @@
         }
 
         .filter-bar {
-            background: #f1f3f4;
+            background: #FEAAD4;
             padding: 5px 15px;
             border-radius: 30px;
             display: flex;
             align-items: center;
             gap: 12px;
-            border: 1px solid #e0e0e0;
+            border: 3px solid #000000;
         }
 
         /* Grid Layout */
@@ -80,7 +81,7 @@
         .image-container {
             width: 100%;
             aspect-ratio: 16 / 10;
-            background-color: #202124; /* Dark placeholder like the bottom rows */
+            background-color: #a60074; /* Dark placeholder like the bottom rows */
             border-radius: var(--border-radius);
             overflow: hidden;
             position: relative;
@@ -127,7 +128,7 @@
 
 .filter-bar {
     display: flex;
-    background-color: #e8e8e8; /* The light gray pill */
+    background-color: #FEAAD4; /* The light gray pill */
     border-radius: 25px;
     padding: 2px 10px;
     overflow: hidden;
@@ -149,7 +150,7 @@
 
 /* Highlighted state */
 .filter-item.active {
-    background-color: #696767; /* Subtle selection gray */
+    background-color: #ec4f9d; /* Subtle selection gray */
     font-weight: bold;
 }
 
@@ -228,9 +229,7 @@
     appearance: none;
     -webkit-appearance: none;
     
-    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214%22%20height%3D%2214%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E");
-    background-repeat: no-repeat;
-    background-position: right 15px center;
+    
     
     transition: all 0.2s ease;
 }
@@ -240,7 +239,7 @@
 }
 
 .modal-select:focus {
-    border-color: #1a73e8;
+    border-color: #000000;
     background-color: #ffffff;
     box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
 }
@@ -248,7 +247,7 @@
 /* Ensure the button is also styled nicely */
 .btn-generate {
     width: 100%;
-    background-color: #1a73e8;
+    background-color: #111111;
     color: white;
     border: none;
     padding: 14px;
@@ -259,7 +258,11 @@
 }
 
 .btn-generate:hover {
-    background-color: #1557b0;
+    background-color: #2b2b2b;
+}
+
+.btn-generate:hover {
+    background-color: #000000;
 }
 
 .close-btn {
@@ -300,7 +303,7 @@
 
 .btn-generate {
     width: 100%;
-    background-color: #1a73e8;
+    background-color: #000000;
     color: white;
     border: none;
     padding: 15px;
@@ -313,7 +316,7 @@
 }
 
 .btn-generate:hover {
-    background-color: #1557b0;
+    background-color: #b0156a;
 }
 
 @media (max-width: 480px) {
