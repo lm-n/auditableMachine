@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="dk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auditable Machine</title>
+    <title>Dektivmaskinen</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <h1><img style='display:inline;' src='glass.png' width="23px" height="23px"/> Auditable Machine </h1>
+        <h1><img style='display:inline;' src='glass.png' width="23px" height="23px"/> Dektivmaskinen </h1>
     </header>
 
     <section class="controls">
         <button class="btn-create" id="create">
-            <span>✏️</span> Create Image
+            <span>✏️</span> Opret billede
         </button>
 
     <div class="filter-group">
     <div class="filter-section">
-        <span>Animals:</span>
+        <span>Dyr:</span>
         <div class="filter-bar" data-type="animal">
             <div class="filter-item" data-value="polarBear">🐻‍❄️</div>
             <div class="filter-item" data-value="giraffe">🦒</div>
@@ -29,7 +29,7 @@
     </div>
 
     <div class="filter-section">
-        <span>Setting:</span>
+        <span>Indstilling:</span>
         <div class="filter-bar" data-type="setting">
             <div class="filter-item" data-value="forest">🌳</div>
             <div class="filter-item" data-value="beach">🏝️</div>
@@ -39,7 +39,7 @@
     </div>
 
     <div class="filter-section">
-        <span>Weather:</span>
+        <span>Vejr:</span>
         <div class="filter-bar" data-type="weather">
             <div class="filter-item" data-value="sunny">☀️</div>
             <div class="filter-item" data-value="rainy">🌧️</div>
@@ -58,7 +58,7 @@
     <div id="createModal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-header">
-            <h2 style="margin:0; font-size: 1.2rem;">Create New Image</h2>
+            <h2 style="margin:0; font-size: 1.2rem;">Opret nyt billede</h2>
             <button class="close-btn" id="closeModal">&times;</button>
         </div>
         
@@ -66,7 +66,7 @@
     <div class="modal-filter-section">
         <label for="modal-animal"></label>
         <select id="modal-animal" class="modal-select">
-            <option value="" disabled selected>Animal</option>
+            <option value="" disabled selected>Dyr</option>
             <option value="polarBear">🐻‍❄️</option>
             <option value="giraffe">🦒</option>
             <option value="monkey">🐒</option>
@@ -77,7 +77,7 @@
     <div class="modal-filter-section">
         <label for="modal-setting"></label>
         <select id="modal-setting" class="modal-select">
-            <option value="" disabled selected>Setting</option>
+            <option value="" disabled selected>Indstilling</option>
             <option value="forest">🌳</option>
             <option value="beach">🏝️</option>
             <option value="ocean">🌊</option>
@@ -88,7 +88,7 @@
     <div class="modal-filter-section">
         <label for="modal-weather"></label>
         <select id="modal-weather" class="modal-select">
-            <option value="" disabled selected>Weather</option>
+            <option value="" disabled selected>Vejr</option>
             <option value="sunny">☀️</option>
             <option value="rainy">🌧️</option>
             <option value="snowy">❄️</option>
@@ -98,11 +98,11 @@
     <div id="resultPreview" style="display: none; margin-top: 5px; text-align: center;">
     <div class="image-container" id="previewContainer">
         </div>
-    <button class="btn-generate" id="addToDatasetBtn" style="margin-top: 15px;">Add to dataset</button>
-    <button id="tryAgainBtn" style="background:none; border:none; color:#666; cursor:pointer; margin-top:10px;">Try another combination</button>
+    <button class="btn-generate" id="addToDatasetBtn" style="margin-top: 15px;">Føj til datasæt </button>
+    <button id="tryAgainBtn" style="background:none; border:none; color:#666; cursor:pointer; margin-top:10px;">Prøv en anden kombination</button>
 </div>
 
-            <button class="btn-generate" id="generateBtn">Generate Image</button>
+            <button class="btn-generate" id="generateBtn">Generer billede</button>
         </div>
     </div>
 </div>
@@ -110,6 +110,6 @@
     <script src="polarBear.js"></script>
     <script src="giraffe.js"></script>
     <script src="chicken.js"></script>
-    <script src="main.js"></script>
+    <script src="maindk.js"></script>
 </body>
 </html>
